@@ -29,3 +29,6 @@ class TaxiPark(object):
         closest_car = min(closest_cars, key=lambda car: car.car_id)
 
         return (closest_car, min_dist)
+
+    def reset(self):
+        [car.reset() for car in self.cars]

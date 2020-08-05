@@ -40,6 +40,12 @@ def tick():
     return {'current_time': current_time}
 
 
+@app.put("/api/reset")
+def reset():
+    taxi_park.reset()
+    return {'status': 'OK'}
+
+
 @app.get("/api/cars")
 def f():
     print(taxi_park.find_closest(1, 2))
