@@ -22,4 +22,7 @@ class TaxiPark(object):
                 min_dist = dist  # update current minimal distance
                 closest_cars = [car]  # starting list of currently known closest cars from the start
 
-        return min(closest_cars, key=lambda car: car.car_id)
+        # finding car with the smallest ID amongst the closest ones (only the same distance)
+        closest_car = min(closest_cars, key=lambda car: car.car_id)
+
+        return (closest_car, min_dist)
