@@ -12,6 +12,11 @@ class TaxiPark(object):
 
         self.cars.append(car)
 
+    def populate_with_n_cars(self, n=0):
+        for i in range(1, n + 1):
+            car = Car(i)
+            self.add_car(car)
+
     def find_closest(self, src):
         # float number representation isn't accurate, so we have to introduce
         # margin epsilon

@@ -2,6 +2,7 @@ from datetime import datetime
 
 from fastapi import FastAPI
 
+from settings import settings
 from models.time import Time
 from models.car import Car
 from models.taxi_park import TaxiPark
@@ -23,11 +24,7 @@ def startup():
     time = Time()
 
     taxi_park = TaxiPark(time)
-
-    num_cars = 3
-    for i in range(1, num_cars + 1):
-        car = Car(i)
-        taxi_park.add_car(car)
+    taxi_park.populate_with_n_cars(settings.num_cars)
 
 
 @app.get("/api")
@@ -53,7 +50,7 @@ async def book(trip: Trip):
     if booking:
         return booking
 
-    return {"status": "No free cars available right now, please wait..."}
+    return {"status": "failed", "message": "No free cars available right now, please wait..."}
 
 
 @app.get("/api/world")
