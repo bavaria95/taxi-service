@@ -49,11 +49,10 @@ async def reset():
 
 @app.post("/api/book")
 async def book(trip: Trip):
-    print(trip.source)
-    print(trip.destination)
+    resp = taxi_park.book_closest(trip.source, trip.destination)
+    return resp
 
 
-@app.get("/api/cars")
-async def f():
-    print(taxi_park.find_closest(1, 2))
-    return {'cars': taxi_park.cars}
+@app.get("/api/world")
+async def world():
+    return {'cars': taxi_park.cars, 'time': time.time}

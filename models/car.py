@@ -1,22 +1,43 @@
-class Car(object):
-    def __init__(self, car_id, x=0, y=0):
-        self.car_id = car_id
-        self.reset()
+from .data import Location
 
-        self.x = x
-        self.y = y
+
+class Car(object):
+    def __init__(self, car_id, location=None):
+        self.car_id = car_id
+
+        if location and isinstance(location, Location):
+            self.location = location
+        else:
+            self.location = Location(x=0, y=0)
+
+        self.reset()
 
     def __repr__(self):
         return (
-            f"(ID={self.car_id}, Location=({self.x}, {self.y}), "
-            f"Booked_till={self.booked_until if self.booked else None}))"
+            f"(ID={self.car_id}, Location={self.location}, "
+            f"Booked_till={self.booked_until})"
         )
 
-    def distance(self, x2, y2):
-        return abs(self.x - x2) + abs(self.y - y2)
+    def distance(self, dst):
+        return self.location.distance(dst)
 
     def reset(self):
-        self.x = 0
-        self.y = 0
-        self.booked = False
+        self.location = Location(x=0, y=0)
         self.booked_until = None
+
+    def free_now(self, current_time):
+        if not self.booked_until:
+            return True
+
+        if self.booked_until <= current_time:
+            return True
+
+        return False
+
+    def book(self, src, dst, current_time, dist_to_client):
+        dist_to_destination = src.distance(dst)
+        trip_time = dist_to_client + dist_to_destination
+        self.booked_until = current_time + trip_time
+        self.location = dst
+
+        return trip_time
