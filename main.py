@@ -49,8 +49,11 @@ async def reset():
 
 @app.post("/api/book")
 async def book(trip: Trip):
-    resp = taxi_park.book_closest(trip.source, trip.destination)
-    return resp
+    booking = taxi_park.book_closest(trip.source, trip.destination)
+    if booking:
+        return booking
+
+    return {"status": "No free cars available right now, please wait..."}
 
 
 @app.get("/api/world")
