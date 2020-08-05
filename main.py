@@ -2,6 +2,7 @@ from datetime import datetime
 
 from fastapi import FastAPI
 
+from models.time import Time
 from models.car import Car
 from models.taxi_park import TaxiPark
 
@@ -10,11 +11,16 @@ app = FastAPI()
 
 
 taxi_park = None
+current_time = None
 
 
 @app.on_event("startup")
 def startup():
     global taxi_park
+    global current_time
+
+    current_time = Time()
+
     taxi_park = TaxiPark()
 
     num_cars = 3
@@ -26,6 +32,12 @@ def startup():
 @app.get("/api")
 def healthcheck():
     return {"status": "OK", "time": datetime.utcnow()}
+
+
+@app.post("/api/tick")
+def tick():
+    current_time.tick()
+    return {'current_time': current_time}
 
 
 @app.get("/api/cars")

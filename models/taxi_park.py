@@ -6,6 +6,9 @@ class TaxiPark(object):
         self.cars = []
 
     def add_car(self, car):
+        if not isinstance(car, Car):
+            raise TypeError("Please pass instance of Car class to .add_car()")
+
         self.cars.append(car)
 
     def find_closest(self, x, y):
