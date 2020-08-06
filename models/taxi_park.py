@@ -7,6 +7,16 @@ class TaxiPark(object):
     '''
         Represents our collection of taxi cars in our world.
         We store a list of Car instances and a referrence to global Time object
+
+        NOTE
+        Here we could possible optimize our solution to be more efficient in finding the most nearby car
+        using kd-tree data structure. For example we could use implementation from scipy (scipy.spatial.KDTree),
+        however in case multiple cars are withing the same distance we want to find the one with lowest ID, so
+        in this case we might need to do 2 queries. Beyond that, updating position of cars and keeping track whether
+        a car is free or not will become not so trivial in this case (but still solveable), not to mention synchronisation,
+        if we want to support concurrency at some point.
+        In any case, usage of kd-trees (or other more sophisticated data structures) in case of 3 cars is definitely
+        an overkill (probably even when having 100 cars).
     '''
 
     def __init__(self, time):
