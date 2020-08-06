@@ -139,7 +139,6 @@ class TestCar:
 
         assert not car.free_now(45)
 
-
     def test_reset(self):
         car = Car(car_id=1, location=Location(x=5, y=3))
 
