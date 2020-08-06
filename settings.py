@@ -11,7 +11,12 @@ class Settings(BaseSettings):
         file from which to read configuration
     '''
 
+    # how many cars we want to have in our world
     num_cars: int = 3
+
+    # float number representation isn't accurate, so we have to introduce
+    # margin epsilon of which error we can tolerate and assume it's the same float number
+    eps = 10e-6
 
     class Config:
         env_file = ".env"
