@@ -68,7 +68,6 @@ class TestTrip:
         with pytest.raises(pydantic.error_wrappers.ValidationError):
             Trip(source=loc1, destination='New York')
 
-
     def test_can_access_coordinates(self):
         loc1 = Location(x=4, y=2)
         loc2 = Location(x=2, y=4)
@@ -269,7 +268,6 @@ class TestTaxiPark:
 
         booking = taxi_park.find_closest(src)
         assert not booking
-
 
     def test_book_closest(self):
         time = Time()
