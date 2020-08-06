@@ -84,7 +84,8 @@ async def book(trip: Trip):
 
     booking = taxi_park.book_closest(trip.source, trip.destination)
     if booking:
-        return booking
+        (car, total_time) = booking
+        return {'car_id': car.car_id, 'total_time': total_time}
 
     # here we still return HTTP code 200, even if cannot find a car
     return {"status": "failed", "message": "No free cars available right now, please wait..."}

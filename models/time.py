@@ -6,10 +6,14 @@ class Time(object):
     '''
 
     def __init__(self, time=0):
-        self.time = time
+        self._time = time
 
     def __repr__(self):
-        return self.time
+        return self._time
 
     def tick(self, i=1):
-        self.time += i
+        self._time += i
+
+    @property
+    def time(self):
+        return self._time

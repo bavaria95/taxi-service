@@ -108,7 +108,8 @@ class TaxiPark(object):
         (car, dist) = closest
         total_time = car.book(src, dst, current_time=self.time.time, dist_to_client=dist)
 
-        return {'car_id': car.car_id, 'total_time': total_time}
+        return (car, total_time)
+
 
     def reset(self):
         '''
