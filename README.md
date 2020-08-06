@@ -2,7 +2,7 @@
 
 ## How to run API locally:
 
-- (optional) create a new virtual environment (`mkvirtualenv taxi -p python3`)
+- (optional) create a new virtual environment (`mkvirtualenv taxi -p python3` or simply `mkvirtualenv taxi` if your default `python` is `3.8`)
 - install dependencies (`pip install -r requirements.txt`)
 - run the server (`uvicorn main:app --port 8080`)
 
