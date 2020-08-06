@@ -12,4 +12,4 @@ class Time(object):
         return self.time
 
     def tick(self, i=1):
-        self.time += 1
+        self.time += i
